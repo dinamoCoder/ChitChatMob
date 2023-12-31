@@ -40,13 +40,17 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   // here expanded take up the entire space i.e:Creates a widget that expands a child of a [Row], [Column],
                   //or [Flex] so that the child fills the available space along the flex widget's main axis.
-                  Expanded(child: CustomButton(
+                  Expanded(
+                      child: CustomButton(
                     message: "Login",
                     onTap: Login(),
+                    color: Colors.transparent,
                   )),
-                  Expanded(child: CustomButton(
+                  Expanded(
+                      child: CustomButton(
                     message: "Sign Up",
                     onTap: Signup(),
+                    color: Colors.white,
                   )),
                 ],
               ),
