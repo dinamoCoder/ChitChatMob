@@ -1,4 +1,5 @@
-//import 'package:chit_chat_mob/screens/splash_screen.dart';
+import 'package:chit_chat_mob/Services/login_register_service.dart';
+import 'package:chit_chat_mob/screens/dashboard_screen.dart';
 import 'package:chit_chat_mob/screens/welcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -19,14 +20,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // title: 'Flutter Demo',
-        // theme: ThemeData(
-        //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        //     useMaterial3: true),
-        home: WelcomeScreen() //SplashScreen(),
-        //home: WelcomeScreen(),
-        );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // title: 'Flutter Demo',
+      // theme: ThemeData(
+      //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+      //     useMaterial3: true),
+      home: FutureBuilder(
+        future: LoginRegisterService.isLoggedIn(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else {
+            return snapshot.data == true
+                ? const DashboardScreen()
+                : const WelcomeScreen();
+          }
+        },
+      ),
+      //home: WelcomeScreen() //SplashScreen(),
+      //home: WelcomeScreen(),
+    );
   }
 }

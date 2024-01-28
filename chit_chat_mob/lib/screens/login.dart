@@ -21,17 +21,16 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   @override
   void initState() {
-    Connectivity().onConnectivityChanged.listen(( result) {
-     setState(() {
-    connectivityResult = result;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(
-        "${connectivityResult.name} Connection  available"
-      ),
-      backgroundColor:
-          connectivityResult == ConnectivityResult.none ? Colors.red : Colors.green,
-    ));
-  });
+    Connectivity().onConnectivityChanged.listen((result) {
+      setState(() {
+        connectivityResult = result;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("${connectivityResult.name} Connection  available"),
+          backgroundColor: connectivityResult == ConnectivityResult.none
+              ? Colors.red
+              : Colors.green,
+        ));
+      });
     });
     super.initState();
 
@@ -47,7 +46,6 @@ class LoginState extends State<Login> {
     //       ),
     //     );
   }
-
 
   @override
   void dispose() {
@@ -114,7 +112,7 @@ class LoginState extends State<Login> {
           });
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (builder) => const DashboardScreen()),
+              MaterialPageRoute(builder: (builder) => DashboardScreen()),
               (route) => false);
         });
         // ignore: use_build_context_synchronously
