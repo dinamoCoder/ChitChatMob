@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
             return const CircularProgressIndicator();
           } else {
             return snapshot.data == true
-                ? const DashboardScreen()
+                ?  DashboardScreen(message: "",)
                 : const WelcomeScreen();
           }
         },

@@ -7,12 +7,15 @@ class LoadSpinner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (show!) {
-      return Center(
-        child: LoadingAnimationWidget.discreteCircle(
-          color: Colors.orange,
-          secondRingColor: const Color(0xFF1A1A3F),
-          thirdRingColor: const Color(0xFFEA3799),
-          size: 50,
+      return Container(
+        color: Colors.black.withOpacity(0.5),
+        child: Center(
+          child: LoadingAnimationWidget.discreteCircle(
+            color: Colors.orange,
+            secondRingColor: const Color(0xFF1A1A3F),
+            thirdRingColor: const Color(0xFFEA3799),
+            size: 50,
+          ),
         ),
       );
     }

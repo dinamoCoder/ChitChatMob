@@ -7,24 +7,24 @@ import 'package:chit_chat_mob/Services/custom_http_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginRegisterService {
-  final HttpClientRequest<LoginRequest, LoginResponse> httpClientRequest;
+  final HttpClientRequest httpClientRequest;
   LoginRegisterService(this.httpClientRequest);
 
 // the user name will be displyed in next phase.
   // static const String _isLoggedInUserInformationKey =
   //     'isLoggedInUserInformation';
   static const String _isLoggedInKey = 'isLoggedInUser';
+  static const String isLoogedInData = "AccessKeyData";
 // this is a asychronous function because we will use the Future keyword
   Future<LoginResponse> loginRequest(LoginRequest loginRequest) async {
     // then we will convert the response that we get
     var loginResponse =
         await httpClientRequest.post(loginRequest.toJson(), "/api/login");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (loginResponse.statusCode == 200) {
       // then we will login the user
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_isLoggedInKey, true);
-      // await prefs.setString(
-      //     _isLoggedInUserInformationKey, jsonEncode(loginResponse.body));
+      await prefs.setString(isLoogedInData, loginResponse.body);
     }
     return fromjson(jsonDecode(loginResponse.body));
   }
@@ -56,7 +56,7 @@ class LoginRegisterService {
   //   return prefs.getString(_isLoggedInUserInformationKey) ?? "";
   // }
 
-  LoginResponse fromjson(Map<String, dynamic> json) {
+  static LoginResponse fromjson(Map<String, dynamic> json) {
     return LoginResponse(
         refreshToken: json['RefreshToken'],
         token: json['Token'],

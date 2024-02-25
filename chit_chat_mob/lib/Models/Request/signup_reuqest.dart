@@ -1,17 +1,15 @@
 class SingUpRequest {
   final String? logo;
-  final String? email;
-  final String? userName;
-  final String? password;
+  final String? githubUserName;
+  final String? githubPassword;
   final String? number;
   const SingUpRequest(
-      {this.logo, this.email, this.userName, this.password, this.number});
+      {this.logo, this.githubUserName, this.githubPassword, this.number});
   Map<String, dynamic> toJson() {
     return {
       'Logo': logo,
-      'Email': email,
-      'UserName': userName,
-      'Password': password,
+      'UserName': githubUserName,
+      'Password': githubPassword,
       'Number': number
     };
   }
